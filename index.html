@@ -5,249 +5,278 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kundenfragebogen – Digitalisierung & KI</title>
   <meta name="description" content="Fragebogen zur Vorbereitung eines Beratungsgesprächs zu Digitalisierung & KI." />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src=https://cdn.tailwindcss.com></script>
   <!-- Professionelle Schriftart: Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href=https://fonts.googleapis.com>
+  <link rel="preconnect" href=https://fonts.gstatic.com crossorigin>
+  <link href=https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap rel="stylesheet">
   <style>
-/* Standalone CSS (ohne Build). Setzt deine hellen Design-Standards um. */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --brand-primary: #31A3C4; /* neues HEPOtech Blau */
-  --brand-accent: #22c55e;  /* green-500 */  /* green-500 */
-  --brand-muted: #f1f5f9;   /* slate-100 */
-  --status-danger: #ef4444; /* red-500 */
-  --status-positive: #10b981; /* emerald-500 */
+  --brand-primary: #31A3C4; /* HEPOtech Blau */
+  --brand-accent: #22c55e;
+  --brand-muted: #f1f5f9;
+  --status-danger: #ef4444;
 }
-
-/* Grundlayout */
 html { background:#f8fafc; color:#0f172a; }
 body { background: var(--background); color: var(--foreground); font-family: Inter, Arial, Helvetica, sans-serif; }
-
-/* Links & Fokus */
-a { color:#0284c7; text-underline-offset:2px; transition: color .15s ease; }
-a:hover { color:#0f172a; text-decoration: underline; }
-:focus-visible { outline:none; box-shadow: 0 0 0 2px #0f172a, 0 0 0 4px #fff; border-radius: 8px; }
-
-/* Komponenten (ohne @apply) */
+ 
 .card { border-radius: 16px; border:1px solid #cbd5e1; background:#fff; padding:24px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
-
-.btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border-radius: 12px; background:#f1f5f9; color:#0f172a; padding:.5rem .75rem; font-size: .9rem; font-weight: 600; border:1px solid #e2e8f0; transition: background .15s ease, border-color .15s ease; }
-.btn-primary:hover { background:#e2e8f0; border-color:#cbd5e1; }
-.btn-primary:focus-visible { box-shadow: 0 0 0 2px #0f172a, 0 0 0 4px #fff; }
-.btn-primary:hover { background:#278EAA; }
+ 
+.btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border-radius: 12px; background:#f1f5f9; color:#0f172a; padding:.5rem .75rem; font-size:.9rem; font-weight: 600; border:1px solid #e2e8f0; transition: background .15s ease, border-color .15s ease; }
+.btn-primary:hover { background:#278EAA; border-color:#278EAA; color:#fff; }
 .btn-primary:focus-visible { box-shadow: 0 0 0 2px #278EAA, 0 0 0 4px #fff; }
-
+ 
 .btn-secondary { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border-radius: 12px; background:#ffffff; color:#0f172a; padding:.5rem .75rem; font-size:.9rem; font-weight:600; border:1px solid #cbd5e1; transition: background .15s ease, border-color .15s ease; }
-.btn-secondary:hover { background:#f8fafc; border-color:#94a3b8; }
-.btn-secondary:focus-visible { box-shadow: 0 0 0 2px #0f172a, 0 0 0 4px #fff; }
-.btn-secondary:hover { background:#e2e8f0; }
-.btn-secondary:focus-visible { box-shadow: 0 0 0 2px #0f172a, 0 0 0 4px #fff; }
-
+.btn-secondary:hover { background:#e2e8f0; border-color:#94a3b8; }
+ 
+.btn-dark { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border-radius:12px; background:#0f172a; color:#fff; padding:.5rem .75rem; font-size:.9rem; font-weight:700; transition: background .15s ease; }
+.btn-dark:hover { background:#0b1220; }
+ 
 .input-field { width:100%; border-radius: 12px; border:1px solid #cbd5e1; background:#fff; padding:.5rem .75rem; font-size:.9rem; color:#0f172a; box-shadow: 0 1px 0 rgba(0,0,0,.02) inset; transition: border-color .15s ease, box-shadow .15s ease; }
 .input-field:focus { border-color:#31A3C4; box-shadow:0 0 0 2px rgba(49,163,196,.3); outline:none; }
 textarea.input-field { min-height: 220px; }
-
 .label { font-size:.9rem; font-weight:600; color:#1e293b; }
 .help-text { font-size:.9rem; color:#475569; }
-
-/* Stepper/Progress */
-.stepper { display:none; }
-.stepper::-webkit-scrollbar{ height:6px; }
-.stepper::-webkit-scrollbar-thumb{ background:#cbd5e1; border-radius:999px; }
-.pill { display:inline-flex; align-items:center; border-radius:999px; border:1px solid #cbd5e1; padding:.25rem .75rem; background:#fff; flex:0 0 auto; }
-.pill.active { background:#f1f5f9; color:#0f172a; border-color:#94a3b8; }
+.error { font-size:.85rem; color: var(--status-danger); margin-top:.25rem; display:none; }
+ 
 .progress { height:8px; width:100%; border-radius:999px; border:1px solid #cbd5e1; overflow:hidden; background:#f1f5f9; }
 .bar { height:100%; background:#31A3C4; width:0%; transition: width .25s ease; }
-
-/* Repeater */
-.repeater-item { border-radius: 12px; border:1px solid #cbd5e1; background:#fff; padding:12px; }
-.repeater-toolbar { display:flex; justify-content:flex-end; gap:.5rem; }
-
-/* Utility Ersatz (minimal, da Tailwind via CDN aktiv ist) */
-.container { max-width: 64rem; margin-inline:auto; padding: 1.5rem; }
-.btn-dark { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border-radius:12px; background:#0f172a; color:#fff; padding:.5rem .75rem; font-size:.9rem; font-weight:700; transition: background .15s ease; }
-.btn-dark:hover { background:#0b1220; }
-
-</style>
+  </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
   <div class="max-w-3xl mx-auto p-6">
     <header class="mb-6 flex items-center gap-4">
-  <!-- Logo: Lege eine Datei logo.png neben index.html ab. Fallback zeigt Initiale H. -->
-  <div class="h-32 w-32">
+      <!-- Logo wiederhergestellt mit Fallback -->
+      <div class="h-32 w-32">
         <img src="./logo.png" alt="HEPOtech Logo" class="h-32 w-32 object-contain" onerror="this.replaceWith(document.getElementById('logo-fallback').content.cloneNode(true))">
         <template id="logo-fallback">
           <div class="grid h-32 w-32 place-items-center rounded-2xl" style="background:#31A3C4;color:#fff;font-weight:800;font-size:2rem">H</div>
         </template>
       </div>
       <div>
-    <h1 class="text-2xl font-bold m-0">HEPOtech – Vorbereitungsgespräch Digitalisierung & KI</h1>
-    <p class="text-sm text-slate-600">Bitte beantworten Sie die Fragen in Ruhe. Die Daten werden lokal zwischengespeichert und nach dem Absenden sicher übertragen.</p>
-  </div>
-</header>
-
-    <div class="card grid gap-6">
-      <div class="stepper" id="stepper"></div>
-      <div class="progress"><div class="bar" id="bar"></div></div>
-
-      <div id="steps">
-  <!-- Schritt 1: Basisdaten -->
-  <section class="step" data-title="Basisdaten">
-    <div class="repeater-item">
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div>
-          <label class="label" for="firma">Firma<span class="text-[color:var(--brand-primary)]"> *</span></label>
-          <input class="input-field" id="firma" name="firma" required />
-        </div>
-        <div>
-          <label class="label" for="ansprechpartner">Ansprechperson<span class="text-[color:var(--brand-primary)]"> *</span></label>
-          <input class="input-field" id="ansprechpartner" name="ansprechpartner" required />
-        </div>
-        <div>
-          <label class="label" for="email">E‑Mail<span class="text-[color:var(--brand-primary)]"> *</span></label>
-          <input class="input-field" id="email" type="email" name="email" required />
-        </div>
-        <div>
-          <label class="label" for="telefon">Telefon</label>
-          <input class="input-field" id="telefon" type="tel" name="telefon" />
-        </div>
-        <div>
-          <label class="label" for="web">Website</label>
-          <input class="input-field" id="web" type="url" name="web" />
-        </div>
-        <div>
-          <label class="label" for="mitarbeiter">Mitarbeiterzahl (ca.)</label>
-          <input class="input-field" id="mitarbeiter" type="number" min="1" step="1" name="mitarbeiter" />
-        </div>
+        <h1 class="text-2xl font-bold m-0">HEPOtech – Vorbereitungsgespräch Digitalisierung & KI</h1>
+        <p class="text-sm text-slate-600">Bitte beantworten Sie die Fragen. Pflichtfelder sind mit * markiert. Die Angaben werden lokal zwischengespeichert.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- Schritt 2: Ziele -->
-  <section class="step" data-title="Ziele">
-          <div class="repeater-item">
-            <label class="label mb-2 block" for="q1">Was sind die drei wichtigsten Ziele der Schröder und Sohn GmbH?</label>
+    </header>
+ 
+    <div class="card grid gap-6">
+      <!-- Rubriken oben entfernt (kein Stepper). Fortschrittsbalken bleibt. -->
+      <div class="progress"><div class="bar" id="bar"></div></div>
+ 
+      <form id="fragebogen" novalidate>
+        <div id="steps" class="grid gap-6">
+ 
+          <!-- Seite 1: Alle Basisfelder zusammen -->
+          <section class="step" data-title="Basis">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div class="md:col-span-2">
+                <label class="label" for="name">Ihr Name <span class="text-[color:var(--brand-primary)]">*</span></label>
+                <input class="input-field" id="name" name="name" autocomplete="name" required />
+                <p class="error" data-for="name">Bitte geben Sie Ihren Namen ein.</p>
+              </div>
+              <div>
+                <label class="label" for="firma">Firma <span class="text-[color:var(--brand-primary)]">*</span></label>
+                <input class="input-field" id="firma" name="firma" required />
+                <p class="error" data-for="firma">Bitte geben Sie den Firmennamen ein.</p>
+              </div>
+              <div>
+                <label class="label" for="ansprechpartner">Ansprechperson <span class="text-[color:var(--brand-primary)]">*</span></label>
+                <input class="input-field" id="ansprechpartner" name="ansprechpartner" required />
+                <p class="error" data-for="ansprechpartner">Bitte nennen Sie eine Ansprechperson.</p>
+              </div>
+              <div>
+                <label class="label" for="email">E-Mail-Adresse <span class="text-[color:var(--brand-primary)]">*</span></label>
+                <input class="input-field" id="email" type="email" name="email" autocomplete="email" required />
+                <p class="error" data-for="email">Bitte geben Sie eine gültige E-Mail-Adresse ein.</p>
+              </div>
+              <div>
+                <label class="label" for="telefon">Telefon (optional)</label>
+                <input class="input-field" id="telefon" type="tel" name="telefon" />
+              </div>
+              <div>
+                <label class="label" for="web">Website (optional)</label>
+                <input class="input-field" id="web" type="url" name="web" />
+              </div>
+            </div>
+          </section>
+ 
+          <!-- Ab hier jede Frage einzeln -->
+          <section class="step" data-title="Mitarbeitende">
+            <label class="label" for="mitarbeiter_q">Wie viele Mitarbeitende hat Ihr Unternehmen (ca.)?</label>
+            <input class="input-field" id="mitarbeiter_q" type="number" min="1" step="1" name="mitarbeiter_q" />
+          </section>
+ 
+          <section class="step" data-title="Ziele">
+            <label class="label" for="q1">Was sind die drei wichtigsten Ziele Ihres Unternehmens?</label>
             <textarea class="input-field" id="q1" name="q1"></textarea>
-          </div>
-        </section>
-
-  <!-- Schritt 3: Störfaktoren -->
-  <section class="step" data-title="Störfaktoren">
-          <div class="repeater-item">
-            <label class="label mb-2 block" for="q2">Welche drei Dinge stören dich aktuell am meisten in deinem Unternehmen?</label>
+          </section>
+ 
+          <section class="step" data-title="Störfaktoren">
+            <label class="label" for="q2">Welche drei Dinge stören Sie aktuell am meisten in Ihrem Unternehmen?</label>
             <textarea class="input-field" id="q2" name="q2"></textarea>
-          </div>
-        </section>
-
-  <!-- Schritt 4: Zeitfresser -->
-  <section class="step" data-title="Zeitfresser">
-          <div class="repeater-item">
-            <label class="label mb-2 block" for="q3">Wo siehst du derzeit die größten Zeitfresser in deinem Unternehmen?</label>
+          </section>
+ 
+          <section class="step" data-title="Zeitfresser">
+            <label class="label" for="q3">Wo sehen Sie derzeit die größten Zeitfresser?</label>
             <textarea class="input-field" id="q3" name="q3"></textarea>
-          </div>
-        </section>
-
-  <!-- Schritt 5: Digitale Rolle -->
-  <section class="step" data-title="Digitale Rolle">
-          <div class="repeater-item">
-            <label class="label mb-2 block" for="q4">Welche Rolle spielen zukünftig digitale Technologien in deinem Unternehmen?</label>
+          </section>
+ 
+          <section class="step" data-title="Digitale Rolle">
+            <label class="label" for="q4">Welche Rolle spielen zukünftig digitale Technologien in Ihrem Unternehmen?</label>
             <textarea class="input-field" id="q4" name="q4"></textarea>
-          </div>
-        </section>
-
-  <!-- Schritt 6: Erwartungen an uns -->
-  <section class="step" data-title="Erwartungen an uns">
-          <div class="repeater-item">
-            <label class="label mb-2 block" for="q5">Welche Erwartungshaltung hast du an uns?</label>
+          </section>
+ 
+          <section class="step" data-title="Erwartungen">
+            <label class="label" for="q5">Welche Erwartungshaltung haben Sie an uns?</label>
             <textarea class="input-field" id="q5" name="q5"></textarea>
-          </div>
-        </section>
-</div>
-
-<div class="flex flex-wrap justify-end gap-2" id="toolbar">
+          </section>
+ 
+        </div>
+      </form>
+ 
+      <div class="flex flex-wrap justify-end gap-2" id="toolbar">
         <button class="btn-secondary" type="button" id="prev">Zurück</button>
         <button class="btn-primary" type="button" id="next">Weiter</button>
         <button class="btn-dark" type="button" id="submit" style="display:none">Jetzt absenden</button>
       </div>
     </div>
-
-    <!-- Datenschutzbereich (eigene Sektion) -->
+ 
+    <!-- Datenschutzbereich -->
     <section id="datenschutz" class="card mt-6" style="display:none">
       <h2 class="text-lg font-semibold mb-2">Datenschutzhinweise</h2>
       <p class="help-text">Verantwortlich: HEPOtech. Wir verarbeiten die in diesem Formular eingegebenen Daten zum Zweck der Vorbereitung und Durchführung eines Beratungsgesprächs. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. a DSGVO (Ihre Einwilligung), sofern Sie zusätzliche Angaben freiwillig machen.</p>
       <ul class="help-text list-disc pl-6">
-        <li>Empfänger: interne Berater/Projektmitglieder; Auftragsverarbeiter (z. B. Hosting/Automationsdienste).</li>
+        <li>Empfänger: interne Berater/Projektmitglieder; Auftragsverarbeiter (z. B. Hosting/Automationsdienste).</li>
         <li>Speicherdauer: bis Abschluss des Projekts bzw. gesetzlicher Aufbewahrungsfristen.</li>
         <li>Ihre Rechte: Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch, Datenübertragbarkeit, Beschwerde bei einer Aufsichtsbehörde.</li>
-        <li>Kontakt für Datenschutzanfragen: <a href="mailto:datenschutz@hepotec.example">datenschutz@hepotec.example</a></li>
+        <li>Kontakt für Datenschutzanfragen: <a href=mailto:max@meisterbuerohamm.de>max@meisterbuerohamm.de</a></li>
       </ul>
       <p class="help-text">Weitere Details und eine vollständige Datenschutzerklärung stellen wir Ihnen auf Anfrage zur Verfügung.</p>
     </section>
-
-    <!-- Datenschutz (initial verborgen) -->
-<section id="datenschutz" class="card mt-6" style="display:none">
-  <h2 class="text-lg font-semibold mb-2">Datenschutzhinweise</h2>
-  <p class="help-text">Verantwortlich: HEPOtech. Wir verarbeiten die in diesem Formular eingegebenen Daten zum Zweck der Vorbereitung und Durchführung eines Beratungsgesprächs. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. a DSGVO (Ihre Einwilligung), sofern Sie zusätzliche Angaben freiwillig machen.</p>
-  <ul class="help-text list-disc pl-6">
-    <li>Empfänger: interne Berater/Projektmitglieder; Auftragsverarbeiter (z. B. Hosting/Automationsdienste).</li>
-    <li>Speicherdauer: bis Abschluss des Projekts bzw. gesetzlicher Aufbewahrungsfristen.</li>
-    <li>Ihre Rechte: Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch, Datenübertragbarkeit, Beschwerde bei einer Aufsichtsbehörde.</li>
-    <li>Kontakt für Datenschutzanfragen: <a href="mailto:max@meisterbuerohamm.de">max@meisterbuerohamm.de</a></li>
-  </ul>
-  <p class="help-text">Weitere Details und eine vollständige Datenschutzerklärung stellen wir Ihnen auf Anfrage zur Verfügung.</p>
-</section>
-
-<footer class="mt-6 text-xs text-slate-600">© <span id="year"></span> HEPOtech · <a href="#datenschutz" class="underline" rel="noopener" id="footer-ds-link">Datenschutz</a></footer>
+ 
+    <footer class="mt-6 text-xs text-slate-600">© <span id="year"></span> HEPOtech · <a href="#datenschutz" class="underline" rel="noopener" id="footer-ds-link">Datenschutz</a></footer>
   </div>
+ 
 <script>
-// Minimaler Wizard + Autosave wie zuvor, kompakt gehalten
 (function(){
   const $ = (s, ctx=document)=>ctx.querySelector(s);
   const $$ = (s, ctx=document)=>Array.from(ctx.querySelectorAll(s));
   const stepsEl = $('#steps');
   const stepEls = $$('.step', stepsEl);
-  const stepper = $('#stepper');
   const bar = $('#bar');
   const prevBtn = $('#prev');
   const nextBtn = $('#next');
   const submitBtn = $('#submit');
+  const form = $('#fragebogen');
 
   const year = $('#year'); if(year) year.textContent = new Date().getFullYear();
-  const FORM_KEY = 'fragebogen_digi_ki_light_v1';
+  const FORM_KEY = 'fragebogen_digi_ki_wizard_v3';
+
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // n8n: HIER deine Webhook-URL (und optional API-Key) eintragen
+  const WEBHOOK_URL = 'https://DEIN-N8N-SERVER/webhook/hepotec/fragebogen';
+  const API_KEY = ''; // optional, z.B. 'MEIN_GEHEIMER_TOKEN'
+  // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
   let current = 0;
 
-  function renderStepper(){
-    stepper.innerHTML='';
-    stepEls.forEach((s,i)=>{
-      const pill = document.createElement('div');
-      pill.className = 'pill' + (i===current? ' active':'');
-      pill.textContent = (i+1)+'. '+(s.dataset.title||'Schritt');
-      stepper.appendChild(pill);
-    });
-  }
   function showStep(i){
     current = Math.max(0, Math.min(i, stepEls.length-1));
     stepEls.forEach((s,idx)=> s.style.display = idx===current ? 'block':'none');
-    renderStepper();
     const pct = Math.round((current/(stepEls.length-1))*100);
     if(bar) bar.style.width = pct+'%';
     prevBtn.disabled = current===0;
     nextBtn.style.display = current===stepEls.length-1 ? 'none':'inline-flex';
     submitBtn.style.display = current===stepEls.length-1 ? 'inline-flex':'none';
   }
-"]`); if(el){ if(el.type==='checkbox') el.checked=!!v; else el.value=v; } }); }catch(e){} }
 
-  nextBtn.addEventListener('click', ()=> showStep(current+1));
+  // Validierung nur für Seite 1 (Pflichtfelder)
+  function validateBasics(){
+    if(current !== 0) return true;
+    const req = ['name','firma','ansprechpartner','email'].map(id=>document.getElementById(id));
+    let ok = true;
+    req.forEach(el=>{
+      const err = document.querySelector(`.error[data-for="${el.id}"]`);
+      if(err) err.style.display='none';
+      el.removeAttribute('aria-invalid');
+      if(!el.value || (el.id==='email' && !el.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/))){
+        ok = false;
+        if(err){ err.style.display='block'; }
+        el.setAttribute('aria-invalid','true');
+      }
+    });
+    return ok;
+  }
+
+  // Autosave
+  function save(){
+    const data = {};
+    const inputs = form.querySelectorAll('input, textarea');
+    inputs.forEach(el=>{ data[el.id] = (el.type==='checkbox') ? el.checked : el.value; });
+    localStorage.setItem(FORM_KEY, JSON.stringify(data));
+  }
+  function load(){
+    try{
+      const raw = localStorage.getItem(FORM_KEY);
+      if(!raw) return;
+      const data = JSON.parse(raw);
+      Object.entries(data).forEach(([id,v])=>{
+        const el = document.getElementById(id);
+        if(el){ if(el.type==='checkbox') el.checked=!!v; else el.value=v; }
+      });
+    }catch(e){ console.warn('Autosave laden fehlgeschlagen', e); }
+  }
+  stepsEl.addEventListener('input', save);
+
+  nextBtn.addEventListener('click', ()=>{
+    if(!validateBasics()) return;
+    showStep(current+1);
+  });
   prevBtn.addEventListener('click', ()=> showStep(current-1));
- location.reload(); } });
- });
 
-  showStep(0);
-showStep(0);
+  // ---------- n8n SUBMIT ----------
+  async function submitToN8N(){
+    // Endgültige Pflicht-Check
+    if(!validateBasics()){ showStep(0); return; }
+
+    // UI sperren
+    submitBtn.disabled = true; nextBtn.disabled = true; prevBtn.disabled = true;
+    const originalSubmitText = submitBtn.textContent;
+    submitBtn.textContent = 'Sende ...';
+
+    // Daten einsammeln + Meta
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+    payload.submittedAt = new Date().toISOString();
+    payload.userAgent = navigator.userAgent;
+
+    try{
+      const res = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(API_KEY ? { 'x-api-key': API_KEY } : {})
+        },
+        body: JSON.stringify(payload)
+      });
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+
+      alert('Vielen Dank! Ihre Angaben wurden übermittelt.');
+      // Optional: Autosave löschen und zum Anfang
+      // localStorage.removeItem(FORM_KEY);
+      // showStep(0);
+    }catch(err){
+      console.error(err);
+      alert('Übermittlung fehlgeschlagen. Bitte versuchen Sie es später erneut.');
+    }finally{
+      submitBtn.disabled = false; nextBtn.disabled = false; prevBtn.disabled = false;
+      submitBtn.textContent = originalSubmitText;
+    }
+  }
+  submitBtn.addEventListener('click', submitToN8N);
+  // ---------- /n8n SUBMIT ----------
 
   // Datenschutz-Link zeigt/scrollt die Sektion
   const dsLink = document.getElementById('footer-ds-link');
@@ -259,6 +288,9 @@ showStep(0);
       dsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
+
+  load();
+  showStep(0);
 })();
 </script>
 </body>
