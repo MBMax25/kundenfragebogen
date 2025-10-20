@@ -54,8 +54,10 @@ textarea.input-field { min-height: 220px; }
 .help-text { font-size:.9rem; color:#475569; }
 
 /* Stepper/Progress */
-.stepper { display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; font-size:.9rem; color:#64748b; }
-.pill { border-radius:999px; border:1px solid #cbd5e1; padding:.25rem .75rem; background:#fff; }
+.stepper { display:flex; flex-wrap: nowrap; align-items:center; gap:.5rem; font-size:.9rem; color:#64748b; overflow-x:auto; white-space:nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.stepper::-webkit-scrollbar{ height:6px; }
+.stepper::-webkit-scrollbar-thumb{ background:#cbd5e1; border-radius:999px; }
+.pill { display:inline-flex; align-items:center; border-radius:999px; border:1px solid #cbd5e1; padding:.25rem .75rem; background:#fff; flex:0 0 auto; }
 .pill.active { background:#f1f5f9; color:#0f172a; border-color:#94a3b8; }
 .progress { height:8px; width:100%; border-radius:999px; border:1px solid #cbd5e1; overflow:hidden; background:#f1f5f9; }
 .bar { height:100%; background:#31A3C4; width:0%; transition: width .25s ease; }
@@ -75,11 +77,13 @@ textarea.input-field { min-height: 220px; }
   <div class="max-w-3xl mx-auto p-6">
     <header class="mb-6 flex items-center gap-4">
   <!-- Logo: Lege eine Datei logo.png neben index.html ab. Fallback zeigt Initiale H. -->
-  <div class="h-12 w-12">
-    <img src="./logo.png" alt="HEPOtech Logo" class="h-12 w-12 object-contain" onerror="this.replaceWith(document.getElementById('logo-fallback').content.cloneNode(true))">
-    <template id="logo-fallback"><div class="grid h-12 w-12 place-items-center rounded-xl" style="background:#31A3C4;color:#fff;font-weight:800">H</div></template>
-  </div>
-  <div>
+  <div class="h-16 w-16">
+        <img src="./logo.png" alt="HEPOtech Logo" class="h-16 w-16 object-contain" onerror="this.replaceWith(document.getElementById('logo-fallback').content.cloneNode(true))">
+        <template id="logo-fallback">
+          <div class="grid h-16 w-16 place-items-center rounded-xl" style="background:#31A3C4;color:#fff;font-weight:800;font-size:1.25rem">H</div>
+        </template>
+      </div>
+      <div>
     <h1 class="text-2xl font-bold m-0">HEPOtech – Vorbereitungsgespräch Digitalisierung & KI</h1>
     <p class="text-sm text-slate-600">Bitte beantworten Sie die Fragen in Ruhe. Die Daten werden lokal zwischengespeichert und nach dem Absenden sicher übertragen.</p>
   </div>
@@ -178,7 +182,7 @@ textarea.input-field { min-height: 220px; }
   </section>
 </div>
 
-<div class="flex flex-wrap justify-end gap-2"> justify-end gap-2">
+<div class="flex flex-wrap justify-end gap-2" id="toolbar">
         <button class="btn-secondary" type="button" id="prev">Zurück</button>
         <button class="btn-primary" type="button" id="next">Weiter</button>
         <button class="btn-secondary" type="button" id="save">Zwischenspeichern</button>
@@ -188,7 +192,7 @@ textarea.input-field { min-height: 220px; }
     </div>
 
     <!-- Datenschutzbereich (eigene Sektion) -->
-    <section id="datenschutz" class="card mt-6">
+    <section id="datenschutz" class="card mt-6" style="display:none">
       <h2 class="text-lg font-semibold mb-2">Datenschutzhinweise</h2>
       <p class="help-text">Verantwortlich: HEPOtech. Wir verarbeiten die in diesem Formular eingegebenen Daten zum Zweck der Vorbereitung und Durchführung eines Beratungsgesprächs. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. a DSGVO (Ihre Einwilligung), sofern Sie zusätzliche Angaben freiwillig machen.</p>
       <ul class="help-text list-disc pl-6">
