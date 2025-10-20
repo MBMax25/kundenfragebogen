@@ -54,7 +54,7 @@ textarea.input-field { min-height: 220px; }
 .help-text { font-size:.9rem; color:#475569; }
 
 /* Stepper/Progress */
-.stepper { display:flex; flex-wrap: nowrap; align-items:center; gap:.5rem; font-size:.9rem; color:#64748b; overflow-x:auto; white-space:nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.stepper { display:none; }
 .stepper::-webkit-scrollbar{ height:6px; }
 .stepper::-webkit-scrollbar-thumb{ background:#cbd5e1; border-radius:999px; }
 .pill { display:inline-flex; align-items:center; border-radius:999px; border:1px solid #cbd5e1; padding:.25rem .75rem; background:#fff; flex:0 0 auto; }
@@ -77,10 +77,10 @@ textarea.input-field { min-height: 220px; }
   <div class="max-w-3xl mx-auto p-6">
     <header class="mb-6 flex items-center gap-4">
   <!-- Logo: Lege eine Datei logo.png neben index.html ab. Fallback zeigt Initiale H. -->
-  <div class="h-16 w-16">
-        <img src="./logo.png" alt="HEPOtech Logo" class="h-16 w-16 object-contain" onerror="this.replaceWith(document.getElementById('logo-fallback').content.cloneNode(true))">
+  <div class="h-32 w-32">
+        <img src="./logo.png" alt="HEPOtech Logo" class="h-32 w-32 object-contain" onerror="this.replaceWith(document.getElementById('logo-fallback').content.cloneNode(true))">
         <template id="logo-fallback">
-          <div class="grid h-16 w-16 place-items-center rounded-xl" style="background:#31A3C4;color:#fff;font-weight:800;font-size:1.25rem">H</div>
+          <div class="grid h-32 w-32 place-items-center rounded-2xl" style="background:#31A3C4;color:#fff;font-weight:800;font-size:2rem">H</div>
         </template>
       </div>
       <div>
@@ -185,8 +185,6 @@ textarea.input-field { min-height: 220px; }
 <div class="flex flex-wrap justify-end gap-2" id="toolbar">
         <button class="btn-secondary" type="button" id="prev">Zurück</button>
         <button class="btn-primary" type="button" id="next">Weiter</button>
-        <button class="btn-secondary" type="button" id="save">Zwischenspeichern</button>
-        <button class="btn-secondary" type="button" id="reset">Zurücksetzen</button>
         <button class="btn-dark" type="button" id="submit" style="display:none">Jetzt absenden</button>
       </div>
     </div>
@@ -231,8 +229,7 @@ textarea.input-field { min-height: 220px; }
   const prevBtn = $('#prev');
   const nextBtn = $('#next');
   const submitBtn = $('#submit');
-  const saveBtn = $('#save');
-  const resetBtn = $('#reset');
+
   const year = $('#year'); if(year) year.textContent = new Date().getFullYear();
   const FORM_KEY = 'fragebogen_digi_ki_light_v1';
 
@@ -257,24 +254,13 @@ textarea.input-field { min-height: 220px; }
     nextBtn.style.display = current===stepEls.length-1 ? 'none':'inline-flex';
     submitBtn.style.display = current===stepEls.length-1 ? 'inline-flex':'none';
   }
-
-  function collect(){
-    const data = {};
-    $$('input,textarea,select').forEach(el=>{
-      if(el.type==='checkbox') data[el.id||el.name]=el.checked; else data[el.id||el.name]=el.value||'';
-    });
-    return data;
-  }
-  function save(){ localStorage.setItem(FORM_KEY, JSON.stringify(collect())); }
-  function load(){ try{ const d=JSON.parse(localStorage.getItem(FORM_KEY)||'null'); if(!d) return; Object.entries(d).forEach(([k,v])=>{ const el = document.getElementById(k) || document.querySelector(`[name="${k}"]`); if(el){ if(el.type==='checkbox') el.checked=!!v; else el.value=v; } }); }catch(e){} }
+"]`); if(el){ if(el.type==='checkbox') el.checked=!!v; else el.value=v; } }); }catch(e){} }
 
   nextBtn.addEventListener('click', ()=> showStep(current+1));
   prevBtn.addEventListener('click', ()=> showStep(current-1));
-  saveBtn.addEventListener('click', save);
-  resetBtn.addEventListener('click', ()=>{ if(confirm('Alle Eingaben löschen?')){ localStorage.removeItem(FORM_KEY); location.reload(); } });
-  stepsEl.addEventListener('input', e=>{ if(e.target && (e.target.id||e.target.name)) save(); });
+ location.reload(); } });
+ });
 
-  load();
   showStep(0);
 showStep(0);
 
