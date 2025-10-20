@@ -21,26 +21,26 @@
 }
 html { background:#f8fafc; color:#0f172a; }
 body { background: var(--background); color: var(--foreground); font-family: Inter, Arial, Helvetica, sans-serif; }
- 
+
 .card { border-radius: 16px; border:1px solid #cbd5e1; background:#fff; padding:24px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
- 
+
 .btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border-radius: 12px; background:#f1f5f9; color:#0f172a; padding:.5rem .75rem; font-size:.9rem; font-weight: 600; border:1px solid #e2e8f0; transition: background .15s ease, border-color .15s ease; }
 .btn-primary:hover { background:#278EAA; border-color:#278EAA; color:#fff; }
 .btn-primary:focus-visible { box-shadow: 0 0 0 2px #278EAA, 0 0 0 4px #fff; }
- 
+
 .btn-secondary { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border-radius: 12px; background:#ffffff; color:#0f172a; padding:.5rem .75rem; font-size:.9rem; font-weight:600; border:1px solid #cbd5e1; transition: background .15s ease, border-color .15s ease; }
 .btn-secondary:hover { background:#e2e8f0; border-color:#94a3b8; }
- 
+
 .btn-dark { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border-radius:12px; background:#0f172a; color:#fff; padding:.5rem .75rem; font-size:.9rem; font-weight:700; transition: background .15s ease; }
 .btn-dark:hover { background:#0b1220; }
- 
+
 .input-field { width:100%; border-radius: 12px; border:1px solid #cbd5e1; background:#fff; padding:.5rem .75rem; font-size:.9rem; color:#0f172a; box-shadow: 0 1px 0 rgba(0,0,0,.02) inset; transition: border-color .15s ease, box-shadow .15s ease; }
 .input-field:focus { border-color:#31A3C4; box-shadow:0 0 0 2px rgba(49,163,196,.3); outline:none; }
 textarea.input-field { min-height: 220px; }
 .label { font-size:.9rem; font-weight:600; color:#1e293b; }
 .help-text { font-size:.9rem; color:#475569; }
 .error { font-size:.85rem; color: var(--status-danger); margin-top:.25rem; display:none; }
- 
+
 .progress { height:8px; width:100%; border-radius:999px; border:1px solid #cbd5e1; overflow:hidden; background:#f1f5f9; }
 .bar { height:100%; background:#31A3C4; width:0%; transition: width .25s ease; }
   </style>
@@ -48,7 +48,7 @@ textarea.input-field { min-height: 220px; }
 <body class="bg-slate-50 text-slate-900">
   <div class="max-w-3xl mx-auto p-6">
     <header class="mb-6 flex items-center gap-4">
-      <!-- Logo wiederhergestellt mit Fallback -->
+      <!-- Logo -->
       <div class="h-32 w-32">
         <img src="./logo.png" alt="HEPOtech Logo" class="h-32 w-32 object-contain" onerror="this.replaceWith(document.getElementById('logo-fallback').content.cloneNode(true))">
         <template id="logo-fallback">
@@ -60,15 +60,15 @@ textarea.input-field { min-height: 220px; }
         <p class="text-sm text-slate-600">Bitte beantworten Sie die Fragen. Pflichtfelder sind mit * markiert. Die Angaben werden lokal zwischengespeichert.</p>
       </div>
     </header>
- 
+
     <div class="card grid gap-6">
-      <!-- Rubriken oben entfernt (kein Stepper). Fortschrittsbalken bleibt. -->
+      <!-- Fortschrittsbalken -->
       <div class="progress"><div class="bar" id="bar"></div></div>
- 
+
       <form id="fragebogen" novalidate>
         <div id="steps" class="grid gap-6">
- 
-          <!-- Seite 1: Alle Basisfelder zusammen -->
+
+          <!-- Seite 1: Basisdaten -->
           <section class="step" data-title="Basis">
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div class="md:col-span-2">
@@ -101,49 +101,49 @@ textarea.input-field { min-height: 220px; }
               </div>
             </div>
           </section>
- 
-          <!-- Ab hier jede Frage einzeln -->
+
+          <!-- Jede Frage einzeln -->
           <section class="step" data-title="Mitarbeitende">
             <label class="label" for="mitarbeiter_q">Wie viele Mitarbeitende hat Ihr Unternehmen (ca.)?</label>
             <input class="input-field" id="mitarbeiter_q" type="number" min="1" step="1" name="mitarbeiter_q" />
           </section>
- 
+
           <section class="step" data-title="Ziele">
             <label class="label" for="q1">Was sind die drei wichtigsten Ziele Ihres Unternehmens?</label>
             <textarea class="input-field" id="q1" name="q1"></textarea>
           </section>
- 
+
           <section class="step" data-title="Störfaktoren">
             <label class="label" for="q2">Welche drei Dinge stören Sie aktuell am meisten in Ihrem Unternehmen?</label>
             <textarea class="input-field" id="q2" name="q2"></textarea>
           </section>
- 
+
           <section class="step" data-title="Zeitfresser">
             <label class="label" for="q3">Wo sehen Sie derzeit die größten Zeitfresser?</label>
             <textarea class="input-field" id="q3" name="q3"></textarea>
           </section>
- 
+
           <section class="step" data-title="Digitale Rolle">
             <label class="label" for="q4">Welche Rolle spielen zukünftig digitale Technologien in Ihrem Unternehmen?</label>
             <textarea class="input-field" id="q4" name="q4"></textarea>
           </section>
- 
+
           <section class="step" data-title="Erwartungen">
             <label class="label" for="q5">Welche Erwartungshaltung haben Sie an uns?</label>
             <textarea class="input-field" id="q5" name="q5"></textarea>
           </section>
- 
+
         </div>
       </form>
- 
+
       <div class="flex flex-wrap justify-end gap-2" id="toolbar">
         <button class="btn-secondary" type="button" id="prev">Zurück</button>
         <button class="btn-primary" type="button" id="next">Weiter</button>
         <button class="btn-dark" type="button" id="submit" style="display:none">Jetzt absenden</button>
       </div>
     </div>
- 
-    <!-- Datenschutzbereich -->
+
+    <!-- Datenschutz -->
     <section id="datenschutz" class="card mt-6" style="display:none">
       <h2 class="text-lg font-semibold mb-2">Datenschutzhinweise</h2>
       <p class="help-text">Verantwortlich: HEPOtech. Wir verarbeiten die in diesem Formular eingegebenen Daten zum Zweck der Vorbereitung und Durchführung eines Beratungsgesprächs. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. a DSGVO (Ihre Einwilligung), sofern Sie zusätzliche Angaben freiwillig machen.</p>
@@ -155,10 +155,10 @@ textarea.input-field { min-height: 220px; }
       </ul>
       <p class="help-text">Weitere Details und eine vollständige Datenschutzerklärung stellen wir Ihnen auf Anfrage zur Verfügung.</p>
     </section>
- 
+
     <footer class="mt-6 text-xs text-slate-600">© <span id="year"></span> HEPOtech · <a href="#datenschutz" class="underline" rel="noopener" id="footer-ds-link">Datenschutz</a></footer>
   </div>
- 
+
 <script>
 (function(){
   const $ = (s, ctx=document)=>ctx.querySelector(s);
@@ -174,11 +174,8 @@ textarea.input-field { min-height: 220px; }
   const year = $('#year'); if(year) year.textContent = new Date().getFullYear();
   const FORM_KEY = 'fragebogen_digi_ki_wizard_v3';
 
-  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  // n8n: HIER deine Webhook-URL (und optional API-Key) eintragen
+  // Feste n8n-URL (Produktiv)
   const WEBHOOK_URL = 'https://n8n.srv872588.hstgr.cloud/webhook/hepotech/fragebogen';
-  const API_KEY = ''; // optional, z.B. 'MEIN_GEHEIMER_TOKEN'
-  // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
   let current = 0;
 
@@ -192,7 +189,6 @@ textarea.input-field { min-height: 220px; }
     submitBtn.style.display = current===stepEls.length-1 ? 'inline-flex':'none';
   }
 
-  // Validierung nur für Seite 1 (Pflichtfelder)
   function validateBasics(){
     if(current !== 0) return true;
     const req = ['name','firma','ansprechpartner','email'].map(id=>document.getElementById(id));
@@ -236,17 +232,14 @@ textarea.input-field { min-height: 220px; }
   });
   prevBtn.addEventListener('click', ()=> showStep(current-1));
 
-  // ---------- n8n SUBMIT ----------
+  // Submit zu n8n (ohne Preflight: Content-Type text/plain)
   async function submitToN8N(){
-    // Endgültige Pflicht-Check
     if(!validateBasics()){ showStep(0); return; }
 
-    // UI sperren
     submitBtn.disabled = true; nextBtn.disabled = true; prevBtn.disabled = true;
     const originalSubmitText = submitBtn.textContent;
     submitBtn.textContent = 'Sende ...';
 
-    // Daten einsammeln + Meta
     const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
     payload.submittedAt = new Date().toISOString();
@@ -255,30 +248,30 @@ textarea.input-field { min-height: 220px; }
     try{
       const res = await fetch(WEBHOOK_URL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(API_KEY ? { 'x-api-key': API_KEY } : {})
-        },
+        headers: { 'Content-Type': 'text/plain' }, // simple request, kein OPTIONS
         body: JSON.stringify(payload)
       });
-      if(!res.ok) throw new Error('HTTP ' + res.status);
+
+      const text = await res.text().catch(()=> '');
+      if(!res.ok){
+        console.error('n8n Fehler', res.status, res.statusText, text);
+        alert('Übermittlung fehlgeschlagen ('+res.status+'). Details in der Konsole.');
+        return;
+      }
 
       alert('Vielen Dank! Ihre Angaben wurden übermittelt.');
-      // Optional: Autosave löschen und zum Anfang
-      // localStorage.removeItem(FORM_KEY);
-      // showStep(0);
+      // localStorage.removeItem(FORM_KEY); showStep(0);
     }catch(err){
-      console.error(err);
-      alert('Übermittlung fehlgeschlagen. Bitte versuchen Sie es später erneut.');
+      console.error('Netzwerk/CORS', err);
+      alert('Übermittlung fehlgeschlagen (Netzwerk/CORS).');
     }finally{
       submitBtn.disabled = false; nextBtn.disabled = false; prevBtn.disabled = false;
       submitBtn.textContent = originalSubmitText;
     }
   }
   submitBtn.addEventListener('click', submitToN8N);
-  // ---------- /n8n SUBMIT ----------
 
-  // Datenschutz-Link zeigt/scrollt die Sektion
+  // Datenschutz-Link
   const dsLink = document.getElementById('footer-ds-link');
   const dsSection = document.getElementById('datenschutz');
   if(dsLink && dsSection){
