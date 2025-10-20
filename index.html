@@ -6,13 +6,17 @@
   <title>Kundenfragebogen – Digitalisierung & KI</title>
   <meta name="description" content="Fragebogen zur Vorbereitung eines Beratungsgesprächs zu Digitalisierung & KI." />
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Professionelle Schriftart: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
 /* Standalone CSS (ohne Build). Setzt deine hellen Design-Standards um. */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --brand-primary: #0ea5e9; /* sky-500/600 */
-  --brand-accent: #22c55e;  /* green-500 */
+  --brand-primary: #31A3C4; /* neues HEPOtech Blau */
+  --brand-accent: #22c55e;  /* green-500 */  /* green-500 */
   --brand-muted: #f1f5f9;   /* slate-100 */
   --status-danger: #ef4444; /* red-500 */
   --status-positive: #10b981; /* emerald-500 */
@@ -20,7 +24,7 @@
 
 /* Grundlayout */
 html { background:#f8fafc; color:#0f172a; }
-body { background: var(--background); color: var(--foreground); font-family: Arial, Helvetica, sans-serif; }
+body { background: var(--background); color: var(--foreground); font-family: Inter, Arial, Helvetica, sans-serif; }
 
 /* Links & Fokus */
 a { color:#0284c7; text-underline-offset:2px; transition: color .15s ease; }
@@ -30,9 +34,9 @@ a:hover { color:#0f172a; text-decoration: underline; }
 /* Komponenten (ohne @apply) */
 .card { border-radius: 16px; border:1px solid #cbd5e1; background:#fff; padding:24px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
 
-.btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border-radius: 12px; background:#0284c7; color:#fff; padding:.5rem .75rem; font-size: .9rem; font-weight: 600; transition: background .15s ease; }
-.btn-primary:hover { background:#0369a1; }
-.btn-primary:focus-visible { box-shadow: 0 0 0 2px #0369a1, 0 0 0 4px #fff; }
+.btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border-radius: 12px; background:#31A3C4; color:#fff; padding:.5rem .75rem; font-size: .9rem; font-weight: 600; transition: background .15s ease; }
+.btn-primary:hover { background:#278EAA; }
+.btn-primary:focus-visible { box-shadow: 0 0 0 2px #278EAA, 0 0 0 4px #fff; }
 
 .btn-secondary { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border-radius: 12px; background:#f1f5f9; color:#0f172a; padding:.5rem .75rem; font-size:.9rem; font-weight:600; border:1px solid #e2e8f0; transition: background .15s ease; }
 .btn-secondary:hover { background:#e2e8f0; }
@@ -49,7 +53,7 @@ a:hover { color:#0f172a; text-decoration: underline; }
 .pill { border-radius:999px; border:1px solid #cbd5e1; padding:.25rem .75rem; background:#fff; }
 .pill.active { background:#f1f5f9; color:#0f172a; border-color:#94a3b8; }
 .progress { height:8px; width:100%; border-radius:999px; border:1px solid #cbd5e1; overflow:hidden; background:#f1f5f9; }
-.bar { height:100%; background:#0ea5e9; width:0%; transition: width .25s ease; }
+.bar { height:100%; background:#31A3C4; width:0%; transition: width .25s ease; }
 
 /* Repeater */
 .repeater-item { border-radius: 12px; border:1px solid #cbd5e1; background:#fff; padding:12px; }
@@ -62,12 +66,16 @@ a:hover { color:#0f172a; text-decoration: underline; }
 <body class="bg-slate-50 text-slate-900">
   <div class="max-w-4xl mx-auto p-6">
     <header class="mb-6 flex items-center gap-4">
-      <div class="grid h-12 w-12 place-items-center rounded-xl bg-sky-600 font-extrabold text-white">M</div>
-      <div>
-        <h1 class="text-2xl font-bold m-0">Vorbereitungsgespräch – Digitalisierung & KI</h1>
-        <p class="text-sm text-slate-600">Bitte beantworten Sie die Fragen in Ruhe. Die Daten werden lokal zwischengespeichert und nach dem Absenden sicher übertragen.</p>
-      </div>
-    </header>
+  <!-- Logo: Lege eine Datei logo.png neben index.html ab. Fallback zeigt Initiale H. -->
+  <div class="h-12 w-12">
+    <img src="./logo.png" alt="HEPOtech Logo" class="h-12 w-12 object-contain" onerror="this.replaceWith(document.getElementById('logo-fallback').content.cloneNode(true))">
+    <template id="logo-fallback"><div class="grid h-12 w-12 place-items-center rounded-xl" style="background:#31A3C4;color:#fff;font-weight:800">H</div></template>
+  </div>
+  <div>
+    <h1 class="text-2xl font-bold m-0">HEPOtech – Vorbereitungsgespräch Digitalisierung & KI</h1>
+    <p class="text-sm text-slate-600">Bitte beantworten Sie die Fragen in Ruhe. Die Daten werden lokal zwischengespeichert und nach dem Absenden sicher übertragen.</p>
+  </div>
+</header>
 
     <div class="card grid gap-6">
       <div class="stepper" id="stepper"></div>
@@ -105,30 +113,45 @@ a:hover { color:#0f172a; text-decoration: underline; }
         </section>
 
         <!-- Allgemeine Fragen -->
-        <section class="step" data-title="Allgemeine Fragen">
-          <div class="grid gap-4">
-            <div>
-              <label class="label" for="q1">1. Was sind die drei wichtigsten Ziele der Schröder und Sohn GmbH?</label>
-              <textarea class="input-field" id="q1" name="q1"></textarea>
-            </div>
-            <div>
-              <label class="label" for="q2">2. Welche drei Dinge stören dich aktuell am meisten in deinem Unternehmen?</label>
-              <textarea class="input-field" id="q2" name="q2"></textarea>
-            </div>
-            <div>
-              <label class="label" for="q3">3. Wo siehst du derzeit die größten Zeitfresser in deinem Unternehmen?</label>
-              <textarea class="input-field" id="q3" name="q3"></textarea>
-            </div>
-            <div>
-              <label class="label" for="q4">4. Welche Rolle spielen zukünftig digitale Technologien in deinem Unternehmen?</label>
-              <textarea class="input-field" id="q4" name="q4"></textarea>
-            </div>
-            <div>
-              <label class="label" for="q5">5. Welche Erwartungshaltung hast du an uns?</label>
-              <textarea class="input-field" id="q5" name="q5"></textarea>
-            </div>
-          </div>
-        </section>
+<section class="step" data-title="Allgemeine Fragen">
+  <div class="grid gap-4">
+    <div class="repeater-item">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="inline-flex h-6 w-6 items-center justify-center rounded-full text-white text-sm font-semibold" style="background:#31A3C4">1</span>
+        <h3 class="m-0 text-base font-semibold">Was sind die drei wichtigsten Ziele der Schröder und Sohn GmbH?</h3>
+      </div>
+      <textarea class="input-field" id="q1" name="q1" placeholder="Ziele 1–3 als Stichpunkte"></textarea>
+    </div>
+    <div class="repeater-item">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="inline-flex h-6 w-6 items-center justify-center rounded-full text-white text-sm font-semibold" style="background:#31A3C4">2</span>
+        <h3 class="m-0 text-base font-semibold">Welche drei Dinge stören dich aktuell am meisten in deinem Unternehmen?</h3>
+      </div>
+      <textarea class="input-field" id="q2" name="q2" placeholder="Störungen/Probleme 1–3"></textarea>
+    </div>
+    <div class="repeater-item">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="inline-flex h-6 w-6 items-center justify-center rounded-full text-white text-sm font-semibold" style="background:#31A3C4">3</span>
+        <h3 class="m-0 text-base font-semibold">Wo siehst du derzeit die größten Zeitfresser in deinem Unternehmen?</h3>
+      </div>
+      <textarea class="input-field" id="q3" name="q3" placeholder="Zeitfresser/Engpässe"></textarea>
+    </div>
+    <div class="repeater-item">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="inline-flex h-6 w-6 items-center justify-center rounded-full text-white text-sm font-semibold" style="background:#31A3C4">4</span>
+        <h3 class="m-0 text-base font-semibold">Welche Rolle spielen zukünftig digitale Technologien in deinem Unternehmen?</h3>
+      </div>
+      <textarea class="input-field" id="q4" name="q4" placeholder="Einsatzfelder, Erwartungen, Bedenken"></textarea>
+    </div>
+    <div class="repeater-item">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="inline-flex h-6 w-6 items-center justify-center rounded-full text-white text-sm font-semibold" style="background:#31A3C4">5</span>
+        <h3 class="m-0 text-base font-semibold">Welche Erwartungshaltung hast du an uns?</h3>
+      </div>
+      <textarea class="input-field" id="q5" name="q5" placeholder="z. B. Ergebnisse, Geschwindigkeit, Zusammenarbeit"></textarea>
+    </div>
+  </div>
+</section>
       </div>
 
       <div class="flex flex-wrap justify-end gap-2">
@@ -140,7 +163,20 @@ a:hover { color:#0f172a; text-decoration: underline; }
       </div>
     </div>
 
-    <footer class="mt-6 text-xs text-slate-600">© <span id="year"></span> meisterbüro · <a href="#" target="_blank" rel="noopener">Datenschutz</a></footer>
+    <!-- Datenschutzbereich (eigene Sektion) -->
+    <section id="datenschutz" class="card mt-6">
+      <h2 class="text-lg font-semibold mb-2">Datenschutzhinweise</h2>
+      <p class="help-text">Verantwortlich: HEPOtech. Wir verarbeiten die in diesem Formular eingegebenen Daten zum Zweck der Vorbereitung und Durchführung eines Beratungsgesprächs. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. a DSGVO (Ihre Einwilligung), sofern Sie zusätzliche Angaben freiwillig machen.</p>
+      <ul class="help-text list-disc pl-6">
+        <li>Empfänger: interne Berater/Projektmitglieder; Auftragsverarbeiter (z. B. Hosting/Automationsdienste).</li>
+        <li>Speicherdauer: bis Abschluss des Projekts bzw. gesetzlicher Aufbewahrungsfristen.</li>
+        <li>Ihre Rechte: Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch, Datenübertragbarkeit, Beschwerde bei einer Aufsichtsbehörde.</li>
+        <li>Kontakt für Datenschutzanfragen: <a href="mailto:datenschutz@hepotec.example">datenschutz@hepotec.example</a></li>
+      </ul>
+      <p class="help-text">Weitere Details und eine vollständige Datenschutzerklärung stellen wir Ihnen auf Anfrage zur Verfügung.</p>
+    </section>
+
+    <footer class="mt-6 text-xs text-slate-600">© <span id="year"></span> HEPOtech · <a href="#datenschutz" class="underline" rel="noopener">Datenschutz</a></footer>
   </div>
 <script>
 // Minimaler Wizard + Autosave wie zuvor, kompakt gehalten
