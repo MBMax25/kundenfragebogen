@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kundenfragebogen – Digitalisierung & KI</title>
-  <meta name="description" content="Fragebogen zur Vorbereitung eines Beratungsgesprächs zu Digitalisierung & KI." />
+  <title>Kundenfragebogen – KI & Automation</title>
+  <meta name="description" content="Fragebogen zur Vorbereitung eines Beratungsgesprächs zu KI & Automation." />
   <script src=https://cdn.tailwindcss.com></script>
   <!-- Professionelle Schriftart: Inter -->
   <link rel="preconnect" href=https://fonts.googleapis.com>
@@ -103,28 +103,28 @@ textarea.input-field { min-height: 220px; }
           </section>
 
           <!-- Jede Frage einzeln -->
-          <section class="step" data-title="Mitarbeitende">
-            <label class="label" for="mitarbeiter_q">Wie viele Mitarbeitende hat Ihr Unternehmen (ca.)?</label>
-            <input class="input-field" id="mitarbeiter_q" type="number" min="1" step="1" name="mitarbeiter_q" />
-          </section>
-
           <section class="step" data-title="Ziele">
-            <label class="label" for="q1">Was sind die drei wichtigsten Ziele Ihres Unternehmens?</label>
+            <label class="label" for="q1">Was sind Ihre wichtigsten Unternehmensziele für das Jahr 2026?</label>
+            <textarea class="input-field" id="q" name="q"></textarea>
+          </section>
+          
+          <section class="step" data-title="Digitale Technologien">
+            <label class="label" for="mitarbeiter_q">Welche Rolle spielen digitale Technologien in Ihrem Unternehmen?</label>
             <textarea class="input-field" id="q1" name="q1"></textarea>
           </section>
 
           <section class="step" data-title="Störfaktoren">
-            <label class="label" for="q2">Welche drei Dinge stören Sie aktuell am meisten in Ihrem Unternehmen?</label>
+            <label class="label" for="q2">Wo sehen Sie aktuell die größten Bedarfe / Chancen in Ihrem Betrieb? </label>
             <textarea class="input-field" id="q2" name="q2"></textarea>
           </section>
 
           <section class="step" data-title="Zeitfresser">
-            <label class="label" for="q3">Wo sehen Sie derzeit die größten Zeitfresser?</label>
+            <label class="label" for="q3">Wo in Ihrem Unternehmen wird derzeit die meiste Zeit verschwendet?</label>
             <textarea class="input-field" id="q3" name="q3"></textarea>
           </section>
 
-          <section class="step" data-title="Digitale Rolle">
-            <label class="label" for="q4">Welche Rolle spielen zukünftig digitale Technologien in Ihrem Unternehmen?</label>
+          <section class="step" data-title="Hindernis">
+            <label class="label" for="q4">Was hindert Sie derzeit daran, diese Themen anzugehen oder zu ändern?</label>
             <textarea class="input-field" id="q4" name="q4"></textarea>
           </section>
 
